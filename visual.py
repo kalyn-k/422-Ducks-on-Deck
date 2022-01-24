@@ -14,6 +14,18 @@ Created file    kek     1/20/22
 from tkinter import *
 
 
+def UserImport():
+    pass
+
+
+def UserExportDaily():
+    pass
+
+
+def UserExportTerm():
+    pass
+
+
 def LeftKeystroke():
     pass
 
@@ -23,11 +35,13 @@ def RightKeystroke():
 
 
 def UpperKeystroke():
+    # Flag
     global class_roster
     # removed = class_roster.dequeue()
 
 
 def LowerKeystroke():
+    # Remove student from deck 
     pass
 
 
@@ -60,13 +74,13 @@ def MenuDisplay():
     menu_win.attributes("-topmost", 1)
 
     # Create menu buttons here
-    export_daily_button = Button(menu_win, text="Export Daily Data", font=("MS Sans Serif", 20))
+    export_daily_button = Button(menu_win, text="Export Daily Data", font=("MS Sans Serif", 20), command=UserExportDaily())
     export_daily_button.place(x=30, y=30)
-    export_total_button = Button(menu_win, text="Export Total Data", font=("MS Sans Serif", 20))
+    export_total_button = Button(menu_win, text="Export Total Data", font=("MS Sans Serif", 20), command=UserExportTerm())
     export_total_button.place(x=30, y=75)
     daily_flags_button = Button(menu_win, text="     Daily Flags      ", font=("MS Sans Serif", 20))
     daily_flags_button.place(x=30, y=120)
-    import_button = Button(menu_win, text="   Import Roster   ", font=("MS Sans Serif", 20))
+    import_button = Button(menu_win, text="   Import Roster   ", font=("MS Sans Serif", 20),command=UserImport())
     import_button.place(x=30, y=160)
     exit_button = Button(menu_win, text="            Exit           ", font=("MS Sans Serif", 20))
     exit_button.place(x=30, y=200)
@@ -75,10 +89,10 @@ def MenuDisplay():
     menu_win.mainloop()
 
 
-
 class_roster = None
 student_names = []
 
 if __name__ == "__main__":
     DeckDisplay()
     MenuDisplay()
+
