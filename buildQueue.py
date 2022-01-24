@@ -35,7 +35,7 @@ class Queue:
 		'''
         self.queue = fileReader.makelist()  # import from file
 
-    def randomize():
+    def randomize(self):
         '''
 		Parameters: None
 
@@ -46,13 +46,13 @@ class Queue:
 		'''
         random.shuffle(self.queue)
 
-    def _count():
+    def _count(self):
         '''
 		Helper function if wanting to know the length of the queue
 		'''
         return len(self.queue)
 
-    def onDeck():
+    def onDeck(self):
         '''
 		Parameters: None
 
@@ -66,7 +66,7 @@ class Queue:
 		'''
         return self.queue[0][0], self.queue[1][0], self.queue[2][0], self.queue[3][0]
 
-    def remove(name, flag):
+    def remove(self, name, flag):
         '''
 		Parameters: 
 		name -> int, the number correlation to the name that will be removed

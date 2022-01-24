@@ -13,16 +13,17 @@ Created file    kek     1/20/22
 # Import Statements
 from tkinter import *
 import sys
-
-# from buildQueue import *
+import buildQueue
 # from fileReader import *
 # from fileWriter import *
 
 # Index of current student in the deck, from 0 to 3
 global current_student
 
+global deck_names
+deck_names = [] # TODO fix this -- need to make an initial list
 
-# current_student = 0
+current_student = 0
 
 
 def UserImport():
@@ -64,7 +65,10 @@ def RightKeystroke(event):
 def UpperKeystroke(event):
     # Flag and remove ?
     global class_roster
+    global deck_names
     # removed = class_roster.dequeue()
+    student_name = deck_names[current_student]
+    buildQueue.remove(student_name, True)
 
 
 def LowerKeystroke(event):
@@ -72,8 +76,8 @@ def LowerKeystroke(event):
     global deck_names
     if current_student != 3:
         deck_names[current_student] = deck_names[current_student + 1]
-    else:
-        deck_names[current_student] = 0 # next student in queue?
+    student_name = deck_names[current_student]
+    buildQueue.remove(student_name, False)
     pass
 
 
@@ -94,27 +98,29 @@ def exit_():
     sys.exit()
 
 
-display_win = Tk(className=" Ducks on Deck ")
+#display_win = Tk(className=" Ducks on Deck ")
 
 
 def DeckDisplay():
     # Initial design - Creates a Window
     # display_win = Tk(className=" Ducks on Deck ")
     # Sets window size
-    display_win.geometry("700x105")
-    display_win.attributes("-topmost", 1)
+    display_win = Toplevel(height=105, width=750)
+    #display_win.geometry("700x105")
+    #display_win.attributes("-topmost", 1)
+    display_win.title(" Ducks on Deck ")
     display_win.resizable(False, False)
-    display_win.mainloop()
+    display_win.attributes('-topmost', 'true')
+    #display_win.mainloop()
 
     # Create four names here
     # Names come from file reader?
 
-
-# Detects keystrokes
-display_win.bind('<Left>', LeftKeystroke)
-display_win.bind('<Right>', RightKeystroke)
-display_win.bind('<Up>', UpperKeystroke)
-display_win.bind('<Down>', LowerKeystroke)
+    # Detects keystrokes
+    display_win.bind('<Left>', LeftKeystroke)
+    display_win.bind('<Right>', RightKeystroke)
+    display_win.bind('<Up>', UpperKeystroke)
+    display_win.bind('<Down>', LowerKeystroke)
 
 
 def MenuDisplay():
@@ -126,7 +132,7 @@ def MenuDisplay():
     menu_win.geometry("220x300")
     # Prevent the menu window from being resized
     menu_win.resizable(False, False)
-    menu_win.attributes("-topmost", 2)
+    #menu_win.attributes("-topmost", 2)
 
     # Create menu buttons here
     export_daily_button = Button(menu_win, text="Export Daily Data", font=("MS Sans Serif", 20),
@@ -144,7 +150,7 @@ def MenuDisplay():
     exit_button = Button(menu_win, text="            Exit           ", font=("MS Sans Serif", 20), command=exit_)
     exit_button.place(x=30, y=200)
     # Button to create a new session
-    session_button = Button(menu_win, text="    New Session   ", font=("MS Sans Serif", 20), command=UpdateDeck)
+    session_button = Button(menu_win, text="    New Session   ", font=("MS Sans Serif", 20), command=DeckDisplay)
     session_button.place(x=30, y=240)
     menu_win.mainloop()
 
@@ -153,5 +159,5 @@ class_roster = None
 student_names = []
 
 if __name__ == "__main__":
-    DeckDisplay()
     MenuDisplay()
+    DeckDisplay()
