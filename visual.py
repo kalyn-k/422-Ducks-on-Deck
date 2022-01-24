@@ -27,10 +27,12 @@ def UserExportTerm():
 
 
 def LeftKeystroke():
+    # Decrement current student?
     pass
 
 
 def RightKeystroke():
+    # Increment current student?
     pass
 
 
