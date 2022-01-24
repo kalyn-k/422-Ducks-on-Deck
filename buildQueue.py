@@ -13,17 +13,18 @@ Initial file 	ek		1/22/22
 
 """
 import random
-import filereader
-import filewriter
+import fileReader
+import fileWriter
+
 
 class Queue:
-	'''
+    '''
 	The purpose of this class is to keep the queue in an organized list
 	that follows a queue data structure. 
 	'''
 
-	def __init__():
-		'''
+    def __init__(self):
+        '''
 		Parameters: None
 
 		Purpose: initializes the queue from the filereader
@@ -32,11 +33,10 @@ class Queue:
 
 		Returns: None, stores queue in class
 		'''
-		self.queue = filereader.makelist() #import from file
+        self.queue = fileReader.makelist()  # import from file
 
-
-	def randomize():
-		'''
+    def randomize():
+        '''
 		Parameters: None
 
 		Purpose: randmomizes the order of the queue
@@ -44,16 +44,16 @@ class Queue:
 		Returns: None, but changes queue order
 
 		'''
-		random.shuffle(self.queue)
+        random.shuffle(self.queue)
 
-	def _count():
-		'''
+    def _count():
+        '''
 		Helper function if wanting to know the length of the queue
 		'''
-		return len(self.queue)
+        return len(self.queue)
 
-	def onDeck():
-		'''
+    def onDeck():
+        '''
 		Parameters: None
 
 		Purpose: 
@@ -64,10 +64,10 @@ class Queue:
 		Returns: Tuple of 4 list items -> ([], [], [], []). 
 		
 		'''
-		return self.queue[0][0], self.queue[1][0], self.queue[2][0], self.queue[3][0]
+        return self.queue[0][0], self.queue[1][0], self.queue[2][0], self.queue[3][0]
 
-	def remove(name, flag):
-		'''
+    def remove(name, flag):
+        '''
 		Parameters: 
 		name -> int, the number correlation to the name that will be removed
 		flag -> bool, if the student's name is flagged either True or False
@@ -81,14 +81,11 @@ class Queue:
 
 		'''
 
-		temp = self.queue[name]
-		self.queue[name].remove()
-		self.queue.append(temp)
-		student_name = self.queue[name][2]
-		student_email = self.queue[name][3]
+        temp = self.queue[name]
+        self.queue[name].remove()
+        self.queue.append(temp)
+        student_name = self.queue[name][2]
+        student_email = self.queue[name][3]
 
-		# (flag: bool, name: str, email: str)
-		filewriter.updateLogs(flag, student_name, student_email)
-
-
-
+        # (flag: bool, name: str, email: str)
+        fileWriter.updateLogs(flag, student_name, student_email)
