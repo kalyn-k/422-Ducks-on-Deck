@@ -12,48 +12,94 @@ Created file    kek     1/20/22
 
 # Import Statements
 from tkinter import *
+import sys
+
+# from buildQueue import *
+# from fileReader import *
+# from fileWriter import *
+
+# Index of current student in the deck, from 0 to 3
+global current_student
+
+
+# current_student = 0
 
 
 def UserImport():
+    # call on file reader
     pass
 
 
 def UserExportDaily():
+    # call on file writer to export daily log
     pass
 
 
 def UserExportTerm():
+    # call on file writer to export term log
     pass
 
 
-def LeftKeystroke():
-    # Decrement current student?
+def DailyFlags():
+    # Access a file of the daily flags
     pass
 
 
-def RightKeystroke():
-    # Increment current student?
-    pass
+def LeftKeystroke(event):
+    global current_student
+    if current_student == 0:
+        current_student = 3
+    else:
+        current_student -= 1
 
 
-def UpperKeystroke():
-    # Flag
+def RightKeystroke(event):
+    global current_student
+    if current_student == 3:
+        current_student = 0
+    else:
+        current_student += 1
+
+
+def UpperKeystroke(event):
+    # Flag and remove ?
     global class_roster
     # removed = class_roster.dequeue()
 
 
-def LowerKeystroke():
-    # Remove student from deck 
+def LowerKeystroke(event):
+    # Remove student from deck
+    global deck_names
+    if current_student != 3:
+        deck_names[current_student] = deck_names[current_student + 1]
+    else:
+        deck_names[current_student] = 0 # next student in queue?
     pass
 
 
 def UpdateDeck():
-    pass
+    global deck_names
+    global class_roster
+
+    # class_roster = queue
+
+    for name in range(4):
+        pass
+        # build queue needs a "get name" function
+        # current_name = class_roster.get_name(name)
+        # deck_names[name] = current_name
+
+
+def exit_():
+    sys.exit()
+
+
+display_win = Tk(className=" Ducks on Deck ")
 
 
 def DeckDisplay():
     # Initial design - Creates a Window
-    display_win = Tk(className=" Ducks on Deck ")
+    # display_win = Tk(className=" Ducks on Deck ")
     # Sets window size
     display_win.geometry("700x105")
     display_win.attributes("-topmost", 1)
@@ -62,6 +108,13 @@ def DeckDisplay():
 
     # Create four names here
     # Names come from file reader?
+
+
+# Detects keystrokes
+display_win.bind('<Left>', LeftKeystroke)
+display_win.bind('<Right>', RightKeystroke)
+display_win.bind('<Up>', UpperKeystroke)
+display_win.bind('<Down>', LowerKeystroke)
 
 
 def MenuDisplay():
@@ -73,21 +126,26 @@ def MenuDisplay():
     menu_win.geometry("220x300")
     # Prevent the menu window from being resized
     menu_win.resizable(False, False)
-    menu_win.attributes("-topmost", 1)
+    menu_win.attributes("-topmost", 2)
 
     # Create menu buttons here
-    export_daily_button = Button(menu_win, text="Export Daily Data", font=("MS Sans Serif", 20), command=UserExportDaily())
+    export_daily_button = Button(menu_win, text="Export Daily Data", font=("MS Sans Serif", 20),
+                                 command=UserExportDaily)
     export_daily_button.place(x=30, y=30)
-    export_total_button = Button(menu_win, text="Export Total Data", font=("MS Sans Serif", 20), command=UserExportTerm())
+    export_total_button = Button(menu_win, text="Export Total Data", font=("MS Sans Serif", 20),
+                                 command=UserExportTerm)
     export_total_button.place(x=30, y=75)
-    daily_flags_button = Button(menu_win, text="     Daily Flags      ", font=("MS Sans Serif", 20))
+    # Daily Flags Button
+    daily_flags_button = Button(menu_win, text="     Daily Flags      ", font=("MS Sans Serif", 20), command=DailyFlags)
     daily_flags_button.place(x=30, y=120)
-    import_button = Button(menu_win, text="   Import Roster   ", font=("MS Sans Serif", 20),command=UserImport())
+    import_button = Button(menu_win, text="   Import Roster   ", font=("MS Sans Serif", 20), command=UserImport)
     import_button.place(x=30, y=160)
-    exit_button = Button(menu_win, text="            Exit           ", font=("MS Sans Serif", 20))
+    # Button to exit session
+    exit_button = Button(menu_win, text="            Exit           ", font=("MS Sans Serif", 20), command=exit_)
     exit_button.place(x=30, y=200)
-    session_button = Button(menu_win, text="    New Session   ", font=("MS Sans Serif", 20))
-    session_button.place(x=30, y=200)
+    # Button to create a new session
+    session_button = Button(menu_win, text="    New Session   ", font=("MS Sans Serif", 20), command=UpdateDeck)
+    session_button.place(x=30, y=240)
     menu_win.mainloop()
 
 
@@ -97,4 +155,3 @@ student_names = []
 if __name__ == "__main__":
     DeckDisplay()
     MenuDisplay()
-
