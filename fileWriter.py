@@ -16,6 +16,14 @@ dailylog = today + "_log.txt"
 termlog = "W2022_log.txt"
 
 
+def exportDailyLog():
+    os.startfile(dailylog)
+
+
+def exportTermLog():
+    os.startfile(termlog)
+
+
 def makeDailyLog():
     file1 = open(dailylog, "w")
     file1.write("Daily log for cold-call-assist program\n")
