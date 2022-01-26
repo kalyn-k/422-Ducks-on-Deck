@@ -13,7 +13,9 @@ Created file    kek     1/20/22
 # Import Statements
 from tkinter import *
 import sys
+from buildQueue import *
 import buildQueue
+
 # from fileReader import *
 # from fileWriter import *
 
@@ -21,9 +23,11 @@ import buildQueue
 global current_student
 
 global deck_names
-deck_names = [] # TODO fix this -- need to make an initial list
+deck_names = []  # TODO fix this -- need to make an initial list
 
 current_student = 0
+
+#initial_queue = Queue()
 
 
 def UserImport():
@@ -39,12 +43,6 @@ def UserExportDaily():
 def UserExportTerm():
     # call on file writer to export term log
     pass
-
-
-def DailyFlags():
-    # Access a file of the daily flags
-    pass
-
 
 def LeftKeystroke(event):
     global current_student
@@ -77,7 +75,7 @@ def LowerKeystroke(event):
     if current_student != 3:
         deck_names[current_student] = deck_names[current_student + 1]
     student_name = deck_names[current_student]
-    buildQueue.remove(student_name, False)
+    queue.remove(student_name, False)
     pass
 
 
@@ -98,20 +96,15 @@ def exit_():
     sys.exit()
 
 
-#display_win = Tk(className=" Ducks on Deck ")
-
-
 def DeckDisplay():
     # Initial design - Creates a Window
-    # display_win = Tk(className=" Ducks on Deck ")
     # Sets window size
     display_win = Toplevel(height=105, width=750)
-    #display_win.geometry("700x105")
-    #display_win.attributes("-topmost", 1)
     display_win.title(" Ducks on Deck ")
+    # Prevent the window from being resized
     display_win.resizable(False, False)
+    # Make the display window the topmost window at all times
     display_win.attributes('-topmost', 'true')
-    #display_win.mainloop()
 
     # Create four names here
     # Names come from file reader?
@@ -132,7 +125,6 @@ def MenuDisplay():
     menu_win.geometry("220x300")
     # Prevent the menu window from being resized
     menu_win.resizable(False, False)
-    #menu_win.attributes("-topmost", 2)
 
     # Create menu buttons here
     export_daily_button = Button(menu_win, text="Export Daily Data", font=("MS Sans Serif", 20),
@@ -142,8 +134,8 @@ def MenuDisplay():
                                  command=UserExportTerm)
     export_total_button.place(x=30, y=75)
     # Daily Flags Button
-    daily_flags_button = Button(menu_win, text="     Daily Flags      ", font=("MS Sans Serif", 20), command=DailyFlags)
-    daily_flags_button.place(x=30, y=120)
+    # daily_flags_button = Button(menu_win, text="     Daily Flags      ", font=("MS Sans Serif", 20), command=DailyFlags)
+    # daily_flags_button.place(x=30, y=120)
     import_button = Button(menu_win, text="   Import Roster   ", font=("MS Sans Serif", 20), command=UserImport)
     import_button.place(x=30, y=160)
     # Button to exit session
@@ -160,4 +152,3 @@ student_names = []
 
 if __name__ == "__main__":
     MenuDisplay()
-    DeckDisplay()
