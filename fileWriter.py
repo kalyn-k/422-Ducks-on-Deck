@@ -4,12 +4,13 @@ fileWriter.py
 Creation Date: Jan. 20, 2022
 Last Updated: Jan. 23, 2022
 
-Authors: Kelly Schombert (ks)
+Authors: Kelly Schombert (ks), Kalyn Koyanagi (kek)
 
 """
 
 from datetime import date
 import os.path
+import os
 
 today = str(date.today())
 dailylog = today + "_log.txt"
@@ -17,11 +18,11 @@ termlog = "W2022_log.txt"
 
 
 def exportDailyLog():
-    os.startfile(dailylog)
+    os.system(dailylog)
 
 
 def exportTermLog():
-    os.startfile(termlog)
+    os.system(termlog)
 
 
 def makeDailyLog():
