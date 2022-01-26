@@ -122,28 +122,30 @@ def MenuDisplay():
     # Create a window for the main menu
     menu_win = Tk(className=" Ducks on Deck: Menu ")
     # Sets window size
-    menu_win.geometry("280x300")
+    menu_win.geometry("250x300")
     # Set background color
     menu_win.configure(bg='black')
     # Prevent the menu window from being resized
     menu_win.resizable(False, False)
 
     # Create menu buttons here
-    export_daily_button = Button(menu_win, text="   Export Daily Data  ", font=("MS Sans Serif", 20),
-                                 command=UserExportDaily,  bg="white")
-    export_daily_button.place(x=30, y=30)
+    export_daily_button = Button(menu_win, text="Export Daily Data", font=("MS Sans Serif", 20),
+                                 command=UserExportDaily, bg="white", width=15)
+    export_daily_button.place(x=28, y=20)
     export_total_button = Button(menu_win, text="Export Performance\n Summary", font=("MS Sans Serif", 20),
-                                 command=UserExportTerm, bg="white")
-    export_total_button.place(x=30, y=75)
+                                 command=UserExportTerm, bg="white", width=15)
+    export_total_button.place(x=28, y=65)
     # Import class data
-    import_button = Button(menu_win, text="   Import Roster   ", font=("MS Sans Serif", 20), command=UserImport,  bg="white")
-    import_button.place(x=30, y=140)
+    import_button = Button(menu_win, text="Import Roster", font=("MS Sans Serif", 20), command=UserImport, bg="white",  width=15)
+    import_button.place(x=28, y=135)
     # Button to exit session
-    exit_button = Button(menu_win, text="            Exit           ", font=("MS Sans Serif", 20), command=exit_,  bg="white")
-    exit_button.place(x=30, y=190)
+    exit_button = Button(menu_win, text="            Exit           ", font=("MS Sans Serif", 20), command=exit_,
+                         bg="white",  width=15)
+    exit_button.place(x=28, y=190)
     # Button to create a new session
-    session_button = Button(menu_win, text="    New Session   ", font=("MS Sans Serif", 20), command=DeckDisplay,  bg="white")
-    session_button.place(x=30, y=240)
+    session_button = Button(menu_win, text="    New Session   ", font=("MS Sans Serif", 20), command=DeckDisplay,
+                            bg="white",  width=15)
+    session_button.place(x=28, y=235)
     menu_win.mainloop()
 
 
