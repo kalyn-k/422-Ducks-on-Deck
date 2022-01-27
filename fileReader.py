@@ -39,10 +39,10 @@ def filereader(fname):
                     roster_list.append(data)
 
             print(roster_list)
-            fileWriter.initSumPerf(roster_list)
+            fileWriter.initSumPerfDict(roster_list)
 
 
 if __name__== "__main__":
-    #filename = 'Fake_class_info.txt'
-    filename = 'Short_Fake_class_info.txt'
+    filename = 'Fake_class_info.txt'
+    #filename = 'Short_Fake_class_info.txt' #this was a random test file on Kelly's system 
     filereader(filename)
