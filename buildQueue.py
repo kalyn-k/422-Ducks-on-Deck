@@ -17,14 +17,15 @@ import fileWriter
 from fileReader import *
 import fileReader
 
+
 class Queue:
-    '''
+    """
 	The purpose of this class is to keep the queue in an organized list
-	that follows a queue data structure. 
-	'''
+	that follows a queue data structure.
+	"""
 
     def __init__(self):
-        '''
+        """
 		Parameters: None
 
 		Purpose: initializes the queue from the filereader
@@ -32,7 +33,7 @@ class Queue:
 		given by the filereader.py
 
 		Returns: None, stores queue in class
-		'''
+		"""
         self.queue = fileReader.filereader()  # import from file
 
     def randomize(self):
@@ -48,7 +49,7 @@ class Queue:
 
     def __iter__(self):
         """makes the queue iterable"""
-        return self
+        return iter(self.queue)
 
     def _count(self):
         '''

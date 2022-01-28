@@ -69,6 +69,7 @@ def filereader():
             #print("DONE WITH INITSUFPERF\n")
             #fileWriter.exportSumPerf(roster_list)
             #print("DONE WITH EXPORTING\n")
+    return roster_list
 
 """ Testing Purposes """
 #if __name__== "__main__":
