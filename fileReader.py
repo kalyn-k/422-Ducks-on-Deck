@@ -21,7 +21,7 @@ roster_list = []
 
 def getFileName():
     fname = ""
-    welcome_message = "Please type in the file name of a csv or text file that \ncontains your class roster.\nThis is an infinit loop until a valid file is entered.\nTo exit program press 'ctl + c\n"    
+    welcome_message = "Please type in the file name of a csv or text file that \ncontains your class roster in a tab deliminated format.\nThis is an infinit loop until a valid file is entered.\nTo exit program press 'ctl + c\n"    
     print(welcome_message)
     for line in sys.stdin:
         print(f"File entered: {line.rstrip()}")
