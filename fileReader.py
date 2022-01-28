@@ -1,7 +1,7 @@
 """
 fileReader.py
 Creation Date: Jan. 20, 2022
-Last Updated: Jan. 26, 2022
+Last Updated: Jan. 27, 2022
 Authors: Kalyn Koyanagi (kek)
 TODO add purpose and function of file
 Modifications:
@@ -40,7 +40,6 @@ def filereader():
     ['First', 'Name', 'Last', 'Name', 'UO', 'ID', '#', 'Email', 'Address',
     'Kyle', 'M', 'Amsler', '950344746', 'Amsler@uoregon.edu',
     5 items but need list of [[Name, ID, email]]
-
     TODO
     '''
     
@@ -54,23 +53,27 @@ def filereader():
     print(f"the file inputted was {fname}")
     
     with open(fname, 'r') as roster:
-        print(roster.read())
+        #print(roster.read())
 
         file_data = roster.read().split("\n")
         #print(file_data)
 
-        for i in range((len(file_data))-1):
+        for i in range(len(file_data)):
             data = file_data[i].split("\t")
-            print(data)
+            #print(data)
             if i != 0:
                 roster_list.append(data)
 
-            print(roster_list)
-            fileWriter.initSumPerf(roster_list)
+            #print(roster_list)
+            #fileWriter.initSumPerf(roster_list)
+            #print("DONE WITH INITSUFPERF\n")
+            #fileWriter.exportSumPerf(roster_list)
+            #print("DONE WITH EXPORTING\n")
+    return roster_list
 
 """ Testing Purposes """
 #if __name__== "__main__":
-#    filereader()
+    #filereader()
     #filename = 'Fake_class_info.txt'
     #filename = 'Short_Fake_class_info.txt'
     #filereader(filename)

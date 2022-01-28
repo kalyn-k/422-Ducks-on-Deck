@@ -13,18 +13,19 @@ Initial file 	ek		1/22/22
 
 """
 import random
-import fileReader
 import fileWriter
+from fileReader import *
+import fileReader
 
 
 class Queue:
-    '''
+    """
 	The purpose of this class is to keep the queue in an organized list
-	that follows a queue data structure. 
-	'''
+	that follows a queue data structure.
+	"""
 
     def __init__(self):
-        '''
+        """
 		Parameters: None
 
 		Purpose: initializes the queue from the filereader
@@ -32,8 +33,8 @@ class Queue:
 		given by the filereader.py
 
 		Returns: None, stores queue in class
-		'''
-        self.queue = fileReader.makelist()  # import from file
+		"""
+        self.queue = fileReader.filereader()  # import from file
 
     def randomize(self):
         '''
@@ -45,6 +46,10 @@ class Queue:
 
 		'''
         random.shuffle(self.queue)
+
+    def __iter__(self):
+        """makes the queue iterable"""
+        return iter(self.queue)
 
     def _count(self):
         '''
@@ -80,11 +85,14 @@ class Queue:
 		Returns: None
 
 		'''
-
+        #print(name)
+        #print(self.queue[name])
         temp = self.queue[name]
-        self.queue[name].remove()
+        #self.queue[name].remove(name)
+        self.queue.remove(self.queue[name])
         self.queue.append(temp)
-        student_name = self.queue[name][2]
+        #print(temp)
+        student_name = self.queue[name][0]
         student_email = self.queue[name][3]
 
         # (flag: bool, name: str, email: str)
