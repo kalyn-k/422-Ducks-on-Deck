@@ -15,7 +15,7 @@ Initial file 	ek		1/22/22
 import random
 import fileWriter
 from fileReader import *
-
+import fileReader
 
 class Queue:
     '''
