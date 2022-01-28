@@ -46,6 +46,10 @@ class Queue:
 		'''
         random.shuffle(self.queue)
 
+    def __iter__(self):
+        """makes the queue iterable"""
+        return self
+
     def _count(self):
         '''
 		Helper function if wanting to know the length of the queue
