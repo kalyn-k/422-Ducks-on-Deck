@@ -58,10 +58,20 @@ class GraphicalUserInterface:
             self.toggleHighlight(self.highlight_ind)
 
     def UpperKeystroke(self, event):
-        pass
+        # TODO
+        # Flags and removes
+        # index to be removed is: self.highlight_ind
+        # Flag is True
+        remove_ind = self.highlight_ind
+        self.currentQueue.remove(remove_ind, True)
 
     def LowerKeystroke(self, event):
-        pass
+        # JUST removes
+        # TODO
+        # index to be removed is: self.highlight_ind
+        # Flag is False
+        remove_ind = self.highlight_ind
+        self.currentQueue.remove(remove_ind, False)
 
     def toggleHighlight(self, highlight_index):
         current_positions = {0: self.student_1, 1: self.student_2, 2: self.student_3, 3: self.student_4}
@@ -69,7 +79,7 @@ class GraphicalUserInterface:
         old.configure(bg='black')
         self.highlight_ind = highlight_index
         new = current_positions.get(self.highlight_ind)
-        new.configure(bg='yellow')
+        new.configure(bg='pink')
         self.on_deck.update()
 
         return
@@ -118,12 +128,15 @@ class GraphicalUserInterface:
         deck.update()
 
     def ondeck(self):
+        # Maybe try and make this redundant...
         names = []
         for stu in self.currentQueue:
             names.append(stu)
         return names[0:4]
 
     def UserExportDaily(self):
+        # TODO DO WE REMOVE THIS?
+        # TODO REMOVE CORRESPONDING BUTTON
         # exportDailyLog()
         pass
 
