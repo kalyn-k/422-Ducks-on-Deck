@@ -65,7 +65,7 @@ def filereader():
                 roster_list.append(data)
 
             #print(roster_list)
-            #fileWriter.initSumPerf(roster_list)
+            fileWriter.initSumPerf(roster_list)
             #print("DONE WITH INITSUFPERF\n")
             #fileWriter.exportSumPerf(roster_list)
             #print("DONE WITH EXPORTING\n")

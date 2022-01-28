@@ -155,10 +155,10 @@ class GraphicalUserInterface:
         # Set background color
         menu.configure(bg='black')
 
+        # Create a Header
+        header = Label(menu, width=50, text="DUCKS ON DECK", bg="black", fg="white")
+        header.pack(side=TOP, padx=10, pady=10)
         # Create menu buttons here
-        export_daily_button = Button(menu, text="Export Daily Data", font=("MS Sans Serif", 20),
-                                     bg="white", width=15)
-        export_daily_button.place(x=28, y=20)
         export_total_button = Button(menu, text="Export Performance\n Summary", font=("MS Sans Serif", 20),
                                      command=self.UserExportTerm, bg="white", width=15)
         export_total_button.place(x=28, y=65)

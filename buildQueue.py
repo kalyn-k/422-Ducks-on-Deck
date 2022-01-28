@@ -92,8 +92,12 @@ class Queue:
         self.queue.remove(self.queue[name])
         self.queue.append(temp)
         #print(temp)
-        student_name = self.queue[name][0]
+        student_name = self.queue[name][0] + " " + self.queue[name][1]
         student_email = self.queue[name][3]
+
+        student_name = student_name.strip()
+        print(student_name)
 
         # (flag: bool, name: str, email: str)
         fileWriter.updateLogs(flag, student_name, student_email)
+        fileWriter.updateSumPerf(flag, student_name)

@@ -96,6 +96,7 @@ def exportSumPerf(roster: list):
     
     for student in roster:
         name = student[0] + " " + student[1]                        # full student name; adds first and last name together
+        name = name.strip()
         ID = student[2]                                             # student ID number
         email = student[3]                                          # student email address
         calltime = timesCalled[name]                                # number of times student was cold called
@@ -114,6 +115,9 @@ def initSumPerf(roster: list):
     """
     for student in roster:
         name = student[0] + " " + student[1]                    # full student name; adds first and last name together
+        name = name.strip()
+        print(name)
+
         timesCalled[name] = 0                                   # timeCalled dict value initialized to 0
         numFlags[name] = 0                                      # numFlags dict value intialized to 0
         listDates[name] = ""                                    # listDates dict value initialized to empty string
