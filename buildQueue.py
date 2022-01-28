@@ -85,11 +85,14 @@ class Queue:
 		Returns: None
 
 		'''
-
+        #print(name)
+        #print(self.queue[name])
         temp = self.queue[name]
-        self.queue[name].remove()
+        #self.queue[name].remove(name)
+        self.queue.remove(self.queue[name])
         self.queue.append(temp)
-        student_name = self.queue[name][2]
+        #print(temp)
+        student_name = self.queue[name][0]
         student_email = self.queue[name][3]
 
         # (flag: bool, name: str, email: str)

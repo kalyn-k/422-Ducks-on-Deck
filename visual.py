@@ -42,20 +42,24 @@ class GraphicalUserInterface:
 
     def RightKeystroke(self, event):
         if self.highlight_ind == 3:
+            old_pos = self.highlight_ind
             self.highlight_ind = 0
-            self.toggleHighlight(self.highlight_ind)
+            self.toggleHighlight(self.highlight_ind, True, old_pos)
 
         else:
+            old_pos = self.highlight_ind
             self.highlight_ind += 1
-            self.toggleHighlight(self.highlight_ind)
+            self.toggleHighlight(self.highlight_ind, True, old_pos)
 
     def LeftKeystroke(self, event):
         if self.highlight_ind == 0:
+            old_pos = 0
             self.highlight_ind = 3
-            self.toggleHighlight(self.highlight_ind)
+            self.toggleHighlight(self.highlight_ind, False, old_pos)
         else:
+            old_pos = self.highlight_ind
             self.highlight_ind -= 1
-            self.toggleHighlight(self.highlight_ind)
+            self.toggleHighlight(self.highlight_ind, False, old_pos)
 
     def UpperKeystroke(self, event):
         # TODO
@@ -64,6 +68,7 @@ class GraphicalUserInterface:
         # Flag is True
         remove_ind = self.highlight_ind
         self.currentQueue.remove(remove_ind, True)
+        self.UpdateDeck(self.ondeck())
 
     def LowerKeystroke(self, event):
         # JUST removes
@@ -72,16 +77,16 @@ class GraphicalUserInterface:
         # Flag is False
         remove_ind = self.highlight_ind
         self.currentQueue.remove(remove_ind, False)
+        self.UpdateDeck(self.ondeck())
 
-    def toggleHighlight(self, highlight_index):
+    def toggleHighlight(self, highlight_index, right, old_pos):
         current_positions = {0: self.student_1, 1: self.student_2, 2: self.student_3, 3: self.student_4}
-        old = current_positions.get(self.highlight_ind)
-        old.configure(bg='black')
+        old = current_positions.get(old_pos)
+        old.configure(bg='white')
         self.highlight_ind = highlight_index
         new = current_positions.get(self.highlight_ind)
         new.configure(bg='pink')
         self.on_deck.update()
-
         return
 
     def presView(self):
@@ -98,15 +103,16 @@ class GraphicalUserInterface:
         self.forth = StringVar()
 
         names = self.ondeck()
-        self.first.set(names[0][0].split()[1] + " " + names[0][0].split()[0].replace(',', ''))
-        self.second.set(names[1][0].split()[1] + " " + names[1][0].split()[0].replace(',', ''))
-        self.third.set(names[2][0].split()[1] + " " + names[2][0].split()[0].replace(',', ''))
-        self.forth.set(names[3][0].split()[1] + " " + names[3][0].split()[0].replace(',', ''))
+        self.first.set(names[0][0].split()[0] + " " + names[0][1].split()[0].replace(',', ''))
+        self.second.set(names[1][0].split()[0] + " " + names[1][1].split()[0].replace(',', ''))
+        self.third.set(names[2][0].split()[0] + " " + names[2][1].split()[0].replace(',', ''))
+        self.forth.set(names[3][0].split()[0] + " " + names[3][1].split()[0].replace(',', ''))
 
         self.highlight_ind = 0
+        # Call highlight toggle?
         self.student_1 = Label(deck, textvariable=self.first)
         self.student_1.pack(padx=12, side=LEFT)
-        self.student_1.configure(width=15, wraplength=100, relief='raised', bg='white')
+        self.student_1.configure(width=15, wraplength=100, relief='raised', bg='pink')
 
         self.student_2 = Label(deck, textvariable=self.second)
         self.student_2.pack(padx=12, side=LEFT)
@@ -134,12 +140,6 @@ class GraphicalUserInterface:
             names.append(stu)
         return names[0:4]
 
-    def UserExportDaily(self):
-        # TODO DO WE REMOVE THIS?
-        # TODO REMOVE CORRESPONDING BUTTON
-        # exportDailyLog()
-        pass
-
     def UserExportTerm(self):
         exportSumPerf(self.currentQueue)
 
@@ -157,7 +157,7 @@ class GraphicalUserInterface:
 
         # Create menu buttons here
         export_daily_button = Button(menu, text="Export Daily Data", font=("MS Sans Serif", 20),
-                                     command=self.UserExportDaily, bg="white", width=15)
+                                     bg="white", width=15)
         export_daily_button.place(x=28, y=20)
         export_total_button = Button(menu, text="Export Performance\n Summary", font=("MS Sans Serif", 20),
                                      command=self.UserExportTerm, bg="white", width=15)
@@ -181,10 +181,10 @@ class GraphicalUserInterface:
         sys.exit()
 
     def UpdateDeck(self, current_ducks):
-        self.first.set(current_ducks[0])
-        self.second.set(current_ducks[1])
-        self.third.set(current_ducks[2])
-        self.forth.set(current_ducks[3])
+        self.first.set(current_ducks[0][0].split()[0] + " " + current_ducks[0][1])
+        self.second.set(current_ducks[1][0].split()[0] + " " + current_ducks[1][1])
+        self.third.set(current_ducks[2][0].split()[0] + " " + current_ducks[2][1])
+        self.forth.set(current_ducks[3][0].split()[0] + " " + current_ducks[3][1])
         self.on_deck.update()
 
         return
