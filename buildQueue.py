@@ -13,8 +13,8 @@ Initial file 	ek		1/22/22
 
 """
 import random
-import fileReader
 import fileWriter
+from fileReader import *
 
 
 class Queue:
@@ -33,7 +33,7 @@ class Queue:
 
 		Returns: None, stores queue in class
 		'''
-        self.queue = fileReader.makelist()  # import from file
+        self.queue = fileReader.filereader()  # import from file
 
     def randomize(self):
         '''
