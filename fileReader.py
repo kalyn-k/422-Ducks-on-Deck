@@ -18,10 +18,9 @@ Finalized file      ek      1/27/22
 Updated comments    ek      1/30/22
 """
 
-from fileWriter import *    # sends initialized queue in alphabetic order to summary perfomance        
 import sys                  # used sys to get user input from command line
 import os                   # used os to validate existing file name and or file path from standard input
-#import fileinput            
+import fileWriter           # sends initialized queue in alphabetic order to summary perfomance        
 
 #roster_list = []
 

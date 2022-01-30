@@ -21,8 +21,8 @@ Debugging	kek	1/29/22
 """
 import random 			# used to randomize queue order
 import fileWriter		# sends information to be exported when a name is removed
-from fileReader import *	# used to initialize queue 
-
+#from filereader import *	# used to initialize queue 
+import fileReader
 class Queue:
     """
     The purpose of this class is to keep the queue in an organized list
