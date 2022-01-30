@@ -5,10 +5,16 @@ Purpose: Control the software user interface
 Creation Date: Jan. 20, 2022
 Last Updated: Jan. 29, 2022
 
-Authors: Kalyn Koyanagi (kek)
+Authors: Kalyn Koyanagi (kek), Liza Richards (ljr)
 TODO add purpose and function of file
 Modifications:
-Created file    kek     1/20/22
+Created file                        kek     1/20/22
+Added keystrokes                    kek     1/21/22
+Updated keystrokes                  ljr     1/22/22
+Finished menu and deck windows      kek     1/23/22
+Updating deck user info complete    kek     1/25/22
+Finished functionality              kek     1/28/22
+Finished final modifications        kek     1/29/22
 """
 
 # Import Statements
@@ -18,6 +24,12 @@ from fileWriter import *                         # used to write to files with s
 
 
 class GraphicalUserInterface:
+    """
+    The purpose of this class is to display the user menu window and
+    the student, as well as keep track of which students are on deck
+    at any present moment.Receives student data from buildQueue, and writes student data using
+    fileWriter.
+    """
 
     def __init__(self):
         # Define user windows for later use
