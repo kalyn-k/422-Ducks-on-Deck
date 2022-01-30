@@ -58,8 +58,9 @@ class Queue:
 
     def __iter__(self):
         """
-        Makes the queue iterable
-	Helper function
+        Helper method to make the queue iterable.
+        Returns:
+            None
         """
         return iter(self.queue)
 
