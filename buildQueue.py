@@ -104,11 +104,11 @@ class Queue:
         temp = self.queue[name] # temp variable to keep track of name being removed
    
         self.queue.remove(self.queue[name]) # removes name from Deck
-        self.queue.append(temp) # adds removed name to end of queue
+        self.queue.append(temp)             # adds removed name to end of queue
       
-        student_name = self.queue[name][0] + " " + self.queue[name][1]
-        student_email = self.queue[name][3]
-        student_name = student_name.strip()
+        student_name = self.queue[name][0] + " " + self.queue[name][1]   # get student's name to send to the file writer
+        student_email = self.queue[name][3]                              # get student's email to send to the file writer
+        student_name = student_name.strip()                              # strip the student's name of white space
 
         # (flag: bool, name: str, email: str)
         fileWriter.updateLogs(flag, student_name, student_email) # updates logs in fileWriter
