@@ -12,9 +12,9 @@ Created file    kek     1/20/22
 """
 
 # Import Statements
-from tkinter import *
-from buildQueue import *
-from fileWriter import *
+from tkinter import *                            # used to create all user interface aspects
+from buildQueue import *                         # used to build/update a queue using student data
+from fileWriter import *                         # used to write to files with session data
 
 
 class GraphicalUserInterface:
@@ -25,33 +25,38 @@ class GraphicalUserInterface:
         self.menu = None
 
         # Student name labels that appear on the "deck"
-        self.student_1 = None
-        self.student_2 = None
-        self.student_3 = None
-        self.student_4 = None
+        self.student_1 = None                    # label for student in the first slot on the "deck"
+        self.student_2 = None                    # label for student in the second slot on the "deck"
+        self.student_3 = None                    # label for student in the third slot on the "deck"
+        self.student_4 = None                    # label for student in the forth slot on the "deck"
 
         # Student names
-        self.first = None
-        self.second = None
-        self.third = None
-        self.forth = None
+        self.first = None                        # name of student in the first slot on the "deck"
+        self.second = None                       # name of student in the second slot on the "deck"
+        self.third = None                        # name of student in the third slot on the "deck"
+        self.forth = None                        # name of student in the forth slot on the "deck"
 
-        self.highlight_ind = 0  # Index to keep track of where the highlight currently is
+        self.highlight_ind = 0                   # Index to keep track of where the highlight currently is
 
-        self.currentQueue = Queue()
-        self.currentQueue.randomize()
+        self.currentQueue = Queue()              # initiate a queue using buildQueue.py
+        self.currentQueue.randomize()            # randomize the queue
 
     def RightKeystroke(self, event):
         """
+        Used when the user uses the right arrow keyboard
+        button. Makes the student currently highlighted become
+        the one to the right of it, or the first position (if
+        the current highlight index is at the last position)
 
+        Parameters:
+            event: tkinter Event
         Returns:
-        :None:
+            None
         """
         if self.highlight_ind == 3:
             old_pos = self.highlight_ind
             self.highlight_ind = 0
             self.toggleHighlight(self.highlight_ind, old_pos)
-
         else:
             old_pos = self.highlight_ind
             self.highlight_ind += 1
@@ -59,9 +64,15 @@ class GraphicalUserInterface:
 
     def LeftKeystroke(self, event):
         """
+        Used when the user uses the left arrow keyboard
+        button. Makes the student currently highlighted become
+        the one to the left of it, or at the forth position (if
+        the current highlight index is at the first position)
 
+        Parameters:
+            event: tkinter Event
         Returns:
-        :None:
+            None
         """
         if self.highlight_ind == 0:
             old_pos = 0
@@ -74,43 +85,53 @@ class GraphicalUserInterface:
 
     def UpperKeystroke(self, event):
         """
+        Used when the user uses the up arrow keyboard
+        button. Removes the currently highlighted student from the
+        queue, and flags the student in the performance summary.
 
+        Parameters:
+            event: tkinter Event
         Returns:
-        :None:
+            None
         """
-        # TODO
-        # Flags and removes
-        # index to be removed is: self.highlight_ind
-        # Flag is True
-        remove_ind = self.highlight_ind
+        remove_ind = self.highlight_ind          # index of student who is going to be removed from the queue
+        # remove the student from the queue, flags them, and then update the deck
         self.currentQueue.remove(remove_ind, True)
         self.UpdateDeck(self.ondeck())
 
     def LowerKeystroke(self, event):
         """
+        Used when the user uses the up arrow keyboard
+        button. Removes the currently highlighted student from the
+        queue. Does not flag the student in the performance summary.
 
+        Parameters:
+            event: tkinter Event
         Returns:
-        :None:
+            None
         """
-        # JUST removes
-        # TODO
-        # index to be removed is: self.highlight_ind
-        # Flag is False
-        remove_ind = self.highlight_ind
+        remove_ind = self.highlight_ind          # index of student who is going to be removed from the queue
+        # remove the student from the queue and then update the deck
         self.currentQueue.remove(remove_ind, False)
         self.UpdateDeck(self.ondeck())
 
     def toggleHighlight(self, highlight_index, old_pos):
         """
+        Used to change which student name is currently
+        highlighted after a left or right keystroke.
 
+        Parameters:
+            highlight_index: int -- index of which student needs to be highlighted
+            old_pos: int -- index of the previously highlighted student.
         Returns:
-        :None:
+            None
         """
+        # dict. of all the students names, and their positions (index) as the keys
         current_positions = {0: self.student_1, 1: self.student_2, 2: self.student_3, 3: self.student_4}
-        old = current_positions.get(old_pos)
-        old.configure(bg='black', fg="white")
-        self.highlight_ind = highlight_index
-        new = current_positions.get(self.highlight_ind)
+        old = current_positions.get(old_pos)     # the label of the student that was previously highlighted
+        old.configure(bg='black', fg="white")    # removes the highlight of the old label
+        self.highlight_ind = highlight_index     # update which index is currently highlighted
+        new = current_positions.get(self.highlight_ind)     # the label of the student that is currently highlighted
         new.configure(bg='white', fg='black')
         self.on_deck.update()
 
@@ -182,7 +203,7 @@ class GraphicalUserInterface:
 
 
         Returns:
-        :None:
+            None
         """
         exportSumPerf(self.currentQueue)
 

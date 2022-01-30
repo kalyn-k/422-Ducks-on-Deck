@@ -108,7 +108,7 @@ def exportSumPerf(roster: list):
 
 def initSumPerf(roster: list):
     """
-    Initialized summary performancy dictionaries and corresponding csv files.
+    Initialized summary performance dictionaries and corresponding csv files.
     Called by fileReader.py with the import of a new roster of students.
 
     :list roster: list of student data: first name, last name, ID number, email address
