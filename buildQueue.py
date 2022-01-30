@@ -48,7 +48,9 @@ class Queue:
         random.shuffle(self.queue)
 
     def __iter__(self):
-        """makes the queue iterable"""
+        """
+        Makes the queue iterable
+        """
         return iter(self.queue)
 
     def _count(self):
@@ -96,7 +98,7 @@ class Queue:
         student_email = self.queue[name][3]
 
         student_name = student_name.strip()
-        print(student_name)
+        #print(student_name)
 
         # (flag: bool, name: str, email: str)
         fileWriter.updateLogs(flag, student_name, student_email)

@@ -66,8 +66,8 @@ def updateLogs(flag: bool, name: str, email: str):
 
 def exportSumPerf(roster: list):
     """
-    Reads currect csv file data to corresponding dictionary, asks user for summary performance file name, writes heading and student data to summary performance file.
-    Called by visual.py when user chooses to export summary performance data
+    Reads current csv file data to corresponding dictionary, asks user for summary performance file name, writes heading and student data to summary performance file.
+    Called by DucksOnDeck.py when user chooses to export summary performance data
 
     :list roster: list of student data: first name, last name, ID number, email address
     """
@@ -116,7 +116,6 @@ def initSumPerf(roster: list):
     for student in roster:
         name = student[0] + " " + student[1]                    # full student name; adds first and last name together
         name = name.strip()
-        print(name)
 
         timesCalled[name] = 0                                   # timeCalled dict value initialized to 0
         numFlags[name] = 0                                      # numFlags dict value intialized to 0
