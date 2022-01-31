@@ -82,7 +82,7 @@ def exportSumPerf(roster: list):
         listDates = {rows[0]:rows[1] for rows in reader}
     
     sumPerfname = ""                                                # summary performance file name; initialized to be empty 
-    message = "Please type in the name you would prefer for the summary performance log\nThe file name will be formatted as [chosen_name].txt\nTo exit program, press ctl + c\n"    # instructions to user for entering summary performance file name
+    message = "Please type in the name you would prefer for the summary performance log\nThe file name will be formatted as [chosen_name].txt\nTo exit program, press 'Ctrl + c'\n"    # instructions to user for entering summary performance file name
     print(message)
     for line in sys.stdin:
         print(f"\nFile name entered: {line.rstrip()}")
@@ -135,7 +135,7 @@ def initSumPerf(roster: list):
 def updateSumPerf(flag: bool, name: str):
     """ 
     Reads current csv file data to corresponding dictionary, updates student data in dictionary, writes new data to csv files.
-    Called by visual.py anytime that a keystroke is pressed and a student is cold called.
+    Called by DucksOnDeck.py anytime that a keystroke is pressed and a student is cold called.
 
     :bool flag: False if student was not flagged, True if student was flagged
     :str name: name of student cold called

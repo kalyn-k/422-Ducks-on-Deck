@@ -20,9 +20,8 @@ Updated comments    ek      1/30/22
 
 import sys                  # used sys to get user input from command line
 import os                   # used os to validate existing file name and or file path from standard input
-import fileWriter           # sends initialized queue in alphabetic order to summary perfomance        
+import fileWriter           # sends initialized queue in alphabetic order to summary perfomance
 
-#roster_list = []
 
 def getFileName():
     '''
@@ -32,16 +31,17 @@ def getFileName():
     '''
     fname = ""  # initialized string for file name input
     # message to user with instructions on what to input and interact with the system
-    welcome_message = "Please type in the file name of a csv or text file that \ncontains your class roster in a tab deliminated format.\nThis is an infinite loop until a valid file is entered.\nTo exit program press 'ctl + c\n"
-    print(welcome_message) # displays message to uder/standard output
-    
+    welcome_message = "Please type in the file name of a csv or text file that \ncontains your class roster in a tab deliminated format.\nThis is an infinite loop until a valid file is entered.\nTo exit program press 'Ctrl + c'\n"
+    print(welcome_message) # displays message to user/standard output
+
     # interprets standard input
     for line in sys.stdin:
         print(f"File entered: {line.rstrip()}") # displays to user the file they entered, useful for ensuring correct file input
-        print("Press 'ctr + d' to submit file") # how to exit standard input
-        fname = line.rstrip() # strips input of white space and new line characters
+        print("Press 'Ctrl + d' to submit file")  # how to exit standard input
+        fname = line.rstrip()  # strips input of white space and new line characters
 
-    return fname # returns file name
+    return fname  # returns file name
+
 
 def filereader():
     '''
@@ -57,27 +57,21 @@ def filereader():
     valid = False       # initialized boolean to check if valid file path/file name
     while (valid != True): #verifies a valid file name has been entered, if not asks for file again
         fname = getFileName() # variable to keep track of file name
-        valid = os.path.exists(fname) # checks if valid file name 
+        valid = os.path.exists(fname) # checks if valid file name
 
 
     print(f"the file inputted was {fname}") # allows use to know what file they entered
-    
-    with open(fname, 'r') as roster: # below parses the file 
+
+    with open(fname, 'r') as roster: # below parses the file
 
         file_data = roster.read().split("\n") # splits each line into a list
 
         for i in range(len(file_data)): # divides the list of each student into usable form
             data = file_data[i].split("\t") # splits into the name, ID number, and email
             if i != 0:
-                roster_list.append(data) 
+                roster_list.append(data)
 
             fileWriter.initSumPerf(roster_list) # initializes summary performance document in alphabetic order
-            
+
     return roster_list # returns list of lists
 
-""" Testing Purposes """
-#if __name__== "__main__":
-    #filereader()
-    #filename = 'Fake_class_info.txt'
-    #filename = 'Short_Fake_class_info.txt'
-    #filereader(filename)
