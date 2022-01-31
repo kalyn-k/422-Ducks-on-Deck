@@ -12,11 +12,11 @@ Called by:
 	DucksOnDeck.py - uses queue to display roster and uses queue class functions to remove names from deck
 
 Modifications:
-Created file    kek     1/20/22
+Created file    kek 1/20/22
 Initial file 	ek	1/22/22
 File complete	ek 	1/26/22
 File updated	ek 	1/28/22
-Debugging	kek	1/29/22
+Debugging	    kek	1/29/22
 
 """
 import random 			# used to randomize queue order
@@ -59,8 +59,6 @@ class Queue:
     def __iter__(self):
         """
         Helper method to make the queue iterable.
-        Returns:
-            None
         """
         return iter(self.queue)
 

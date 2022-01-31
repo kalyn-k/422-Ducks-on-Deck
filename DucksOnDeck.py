@@ -3,7 +3,7 @@ Name: DucksOnDeck.py
 Purpose: Control the software user interface
 
 Creation Date: Jan. 20, 2022
-Last Updated: Jan. 29, 2022
+Last Updated: Jan. 30, 2022
 
 Authors: Kalyn Koyanagi (kek), Liza Richards (ljr)
 TODO add purpose and function of file
@@ -32,6 +32,17 @@ class GraphicalUserInterface:
     """
 
     def __init__(self):
+        """
+        Initializes the user display windows, the
+        queue used for the deck, as well as the
+        student names and indices that are used
+        for the deck.
+
+        Parameters:
+            None
+        Returns:
+            None
+        """
         # Define user windows for later use
         self.on_deck = None
         self.menu = None
@@ -40,13 +51,13 @@ class GraphicalUserInterface:
         self.student_1 = None                    # label for student in the first slot on the "deck"
         self.student_2 = None                    # label for student in the second slot on the "deck"
         self.student_3 = None                    # label for student in the third slot on the "deck"
-        self.student_4 = None                    # label for student in the forth slot on the "deck"
+        self.student_4 = None                    # label for student in the fourth slot on the "deck"
 
         # Student names
         self.first = None                        # name of student in the first slot on the "deck"
         self.second = None                       # name of student in the second slot on the "deck"
         self.third = None                        # name of student in the third slot on the "deck"
-        self.forth = None                        # name of student in the forth slot on the "deck"
+        self.fourth = None                        # name of student in the fourth slot on the "deck"
 
         self.highlight_ind = 0                   # Index to keep track of where the highlight currently is
 
@@ -65,20 +76,24 @@ class GraphicalUserInterface:
         Returns:
             None
         """
+        # check if the student currently highlighted is at the end of the deck
         if self.highlight_ind == 3:
-            old_pos = self.highlight_ind
-            self.highlight_ind = 0
+            old_pos = self.highlight_ind         # index of the previously highlighted student
+            self.highlight_ind = 0               # new updated highlight index
+            # update the deck to represent which student needs to be highlighted
             self.toggleHighlight(self.highlight_ind, old_pos)
         else:
-            old_pos = self.highlight_ind
-            self.highlight_ind += 1
+            # student is not at the end of the deck
+            old_pos = self.highlight_ind         # index of the previously highlighted student
+            self.highlight_ind += 1              # new updated highlight index
+            # update the deck to represent which student needs to be highlighted
             self.toggleHighlight(self.highlight_ind, old_pos)
 
     def LeftKeystroke(self, event):
         """
         Used when the user uses the left arrow keyboard
         button. Makes the student currently highlighted become
-        the one to the left of it, or at the forth position (if
+        the one to the left of it, or at the fourth position (if
         the current highlight index is at the first position)
 
         Parameters:
@@ -86,13 +101,16 @@ class GraphicalUserInterface:
         Returns:
             None
         """
+        # check if the student currently highlighted is at the beginning of the deck
         if self.highlight_ind == 0:
-            old_pos = 0
-            self.highlight_ind = 3
+            old_pos = 0                          # index of the previously highlighted student
+            self.highlight_ind = 3               # new updated highlight index
+            # update the deck to represent which student needs to be highlighted
             self.toggleHighlight(self.highlight_ind, old_pos)
         else:
-            old_pos = self.highlight_ind
-            self.highlight_ind -= 1
+            old_pos = self.highlight_ind         # index of the previously highlighted student
+            self.highlight_ind -= 1              # new updated highlight index
+            # update the deck to represent which student needs to be highlighted
             self.toggleHighlight(self.highlight_ind, old_pos)
 
     def UpperKeystroke(self, event):
@@ -107,6 +125,7 @@ class GraphicalUserInterface:
             None
         """
         remove_ind = self.highlight_ind          # index of student who is going to be removed from the queue
+
         # remove the student from the queue, flags them, and then update the deck
         self.currentQueue.remove(remove_ind, True)
         self.UpdateDeck(self.ondeck())
@@ -144,55 +163,68 @@ class GraphicalUserInterface:
         old.configure(bg='black', fg="white")    # removes the highlight of the old label
         self.highlight_ind = highlight_index     # update which index is currently highlighted
         new = current_positions.get(self.highlight_ind)     # the label of the student that is currently highlighted
-        new.configure(bg='white', fg='black')
-        self.on_deck.update()
+        new.configure(bg='white', fg='black')    # change the highlight color for the new name that is highlighted
+        self.on_deck.update()                    # update the deck to reflect new deck
 
     def presView(self):
         """
+        Purpose is to create the deck window, and initiate the
+        names on the deck. Also monitors when the user
+        does a keystroke.
 
+        Parameters:
+            None
         Returns:
-        :None:
+            None
         """
+        # Initiate the deck window, and set the dimension and background color
         self.on_deck = Toplevel(height=105, width=750, bg='black')
         deck = self.on_deck
         deck.deiconify()
+        # Title the deck window
         deck.title("Ducks on Deck")
+        # Prevent the deck from being resized
         deck.resizable(False, False)
         # Make the display window the topmost window at all times
         deck.attributes('-topmost', 'true')
+
+        # initiate the student names
         self.first = StringVar()
         self.second = StringVar()
         self.third = StringVar()
-        self.forth = StringVar()
+        self.fourth = StringVar()
 
-        names = self.ondeck()
+        names = self.ondeck()                    # Get the names of the students
+        # assign the names of the students to their respective spots on the deck
         self.first.set(names[0][0].split()[0] + " " + names[0][1].split()[0].replace(',', ''))
         self.second.set(names[1][0].split()[0] + " " + names[1][1].split()[0].replace(',', ''))
         self.third.set(names[2][0].split()[0] + " " + names[2][1].split()[0].replace(',', ''))
-        self.forth.set(names[3][0].split()[0] + " " + names[3][1].split()[0].replace(',', ''))
+        self.fourth.set(names[3][0].split()[0] + " " + names[3][1].split()[0].replace(',', ''))
 
-        self.highlight_ind = 0
-        # Call highlight toggle?
+        self.highlight_ind = 0                   # index of the first name that is highlighted on the deck
+
+        # set the first student's position on the deck
         self.student_1 = Label(deck, textvariable=self.first)
         self.student_1.pack(padx=12, pady=6, side=LEFT)
         self.student_1.configure(width=15, height=2, wraplength=100, relief='flat', bg='white', fg="black",
                                  font=("TkDefaultFont", 15))
-
+        # set the second student's position on the deck
         self.student_2 = Label(deck, textvariable=self.second)
         self.student_2.pack(padx=12, pady=6, side=LEFT)
         self.student_2.configure(width=15, height=2, wraplength=100, relief='flat', bg='black', fg="white",
                                  font=("TkDefaultFont", 15))
-
+        # set the third student's position on the deck
         self.student_3 = Label(deck, textvariable=self.third)
         self.student_3.pack(padx=12, pady=6, side=LEFT)
         self.student_3.configure(width=15, height=2, wraplength=100, relief='flat', bg='black', fg="white",
                                  font=("TkDefaultFont", 15))
-
-        self.student_4 = Label(deck, textvariable=self.forth)
+        # set the fourth student's position on the deck
+        self.student_4 = Label(deck, textvariable=self.fourth)
         self.student_4.pack(padx=12, pady=6, side=LEFT)
         self.student_4.configure(width=15, height=2, wraplength=100, relief='flat', bg='black', fg="white",
                                  font=("TkDefaultFont", 15))
 
+        # monitor which keystrokes that are initiated by the user, and all their respective methods
         deck.bind('<Left>', self.LeftKeystroke)
         deck.bind('<Right>', self.RightKeystroke)
         deck.bind('<Up>', self.UpperKeystroke)
@@ -201,10 +233,21 @@ class GraphicalUserInterface:
         deck.update()
 
     def ondeck(self):
-        # Maybe try and make this redundant...
-        names = []
+        """
+        Purpose of method is to create and return a list that
+        contains only the names of the four students on the
+        deck.
+
+        Parameters:
+            None
+        Returns:
+            names: list of names of the students on the deck
+        """
+        names = []                               # list that will be used to store the names of the students on the deck
+        # iterate through the queue and add each name to the list
         for stu in self.currentQueue:
             names.append(stu)
+        # return the names of the students on deck
         return names[0:4]
 
     def UserExportTerm(self):
@@ -213,13 +256,21 @@ class GraphicalUserInterface:
         fileWriter.py to export a summary performance
         log using the data from the current queue.
 
-
+        Parameter:
+            None
         Returns:
             None
         """
+        # call exportSumPerf from fileWriter.py to
         exportSumPerf(self.currentQueue)
 
     def MenuDisplay(self):
+        """
+        Method to
+
+        Returns:
+        :None:
+        """
         self.menu = Tk()  # Toplevel()  # " Ducks on Deck: Menu ")
         menu = self.menu
         menu.title(" Ducks on Deck: Menu ")
@@ -261,6 +312,7 @@ class GraphicalUserInterface:
 
     def UpdateDeck(self, current_ducks):
         """
+        Purpose of this method
 
         Returns:
         :None:
@@ -268,7 +320,7 @@ class GraphicalUserInterface:
         self.first.set(current_ducks[0][0].split()[0] + " " + current_ducks[0][1])
         self.second.set(current_ducks[1][0].split()[0] + " " + current_ducks[1][1])
         self.third.set(current_ducks[2][0].split()[0] + " " + current_ducks[2][1])
-        self.forth.set(current_ducks[3][0].split()[0] + " " + current_ducks[3][1])
+        self.fourth.set(current_ducks[3][0].split()[0] + " " + current_ducks[3][1])
         self.on_deck.update()
 
         return
