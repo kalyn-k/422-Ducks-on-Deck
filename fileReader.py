@@ -74,10 +74,3 @@ def filereader():
             fileWriter.initSumPerf(roster_list) # initializes summary performance document in alphabetic order
             
     return roster_list # returns list of lists
-
-""" Testing Purposes """
-#if __name__== "__main__":
-    #filereader()
-    #filename = 'Fake_class_info.txt'
-    #filename = 'Short_Fake_class_info.txt'
-    #filereader(filename)
