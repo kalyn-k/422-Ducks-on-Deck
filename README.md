@@ -1,4 +1,4 @@
-# DucksonDeck
+# DucksOnDeck
 
 422 project1
 
