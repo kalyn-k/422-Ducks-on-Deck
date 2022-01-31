@@ -71,13 +71,13 @@ def exportSumPerf(roster: list):
 
     :list roster: list of student data: first name, last name, ID number, email address
     """
-    with open('timesCalled.csv', mode='r') as inp:
+    with open('../timesCalled.csv', mode='r') as inp:
         reader = csv.reader(inp)                                    # csv reader object for timesCalled.csv file
         timesCalled = {rows[0]:int(rows[1]) for rows in reader}
-    with open('numFlags.csv', mode='r') as inp:
+    with open('../numFlags.csv', mode='r') as inp:
         reader = csv.reader(inp)                                    # csv reader object for numFlags.csv file
         numFlags = {rows[0]:int(rows[1]) for rows in reader}
-    with open('listDates.csv', mode='r') as inp:
+    with open('../listDates.csv', mode='r') as inp:
         reader = csv.reader(inp)                                    # csv reader object for listDates.csv file
         listDates = {rows[0]:rows[1] for rows in reader}
     
@@ -121,9 +121,9 @@ def initSumPerf(roster: list):
         numFlags[name] = 0                                      # numFlags dict value intialized to 0
         listDates[name] = ""                                    # listDates dict value initialized to empty string
     
-    saveCalls = csv.writer(open("timesCalled.csv", "w"))        # csv writer object for timesCalled.csv file
-    saveFlags = csv.writer(open("numFlags.csv", "w"))           # csv writer object for numFlags.csv file
-    saveDates = csv.writer(open("listDates.csv", "w"))          # csv writer object for listDates.csv file
+    saveCalls = csv.writer(open("../timesCalled.csv", "w"))        # csv writer object for timesCalled.csv file
+    saveFlags = csv.writer(open("../numFlags.csv", "w"))           # csv writer object for numFlags.csv file
+    saveDates = csv.writer(open("../listDates.csv", "w"))          # csv writer object for listDates.csv file
 
     for key, val in timesCalled.items():
         saveCalls.writerow([key, val])
@@ -140,13 +140,13 @@ def updateSumPerf(flag: bool, name: str):
     :bool flag: False if student was not flagged, True if student was flagged
     :str name: name of student cold called
     """
-    with open('timesCalled.csv', mode='r') as inp:
+    with open('../timesCalled.csv', mode='r') as inp:
         reader = csv.reader(inp)                                # csv reader object for timesCalled.csv file
         timesCalled = {rows[0]:int(rows[1]) for rows in reader}
-    with open('numFlags.csv', mode='r') as inp:
+    with open('../numFlags.csv', mode='r') as inp:
         reader = csv.reader(inp)                                # csv reader object for numFlags.csv file
         numFlags = {rows[0]:int(rows[1]) for rows in reader}
-    with open('listDates.csv', mode='r') as inp:
+    with open('../listDates.csv', mode='r') as inp:
         reader = csv.reader(inp)                                # csv reader object for listDates.csv file
         listDates = {rows[0]:rows[1] for rows in reader}
 
@@ -155,9 +155,9 @@ def updateSumPerf(flag: bool, name: str):
     timesCalled[name] += 1
     listDates[name] += today + " "
     
-    saveCalls = csv.writer(open("timesCalled.csv", "w"))        # csv writer object for timesCalled.csv file
-    saveFlags = csv.writer(open("numFlags.csv", "w"))           # csv writer object for numFlags.csv file
-    saveDates = csv.writer(open("listDates.csv", "w"))          # csv writer object for listDates.csv file
+    saveCalls = csv.writer(open("../timesCalled.csv", "w"))        # csv writer object for timesCalled.csv file
+    saveFlags = csv.writer(open("../numFlags.csv", "w"))           # csv writer object for numFlags.csv file
+    saveDates = csv.writer(open("../listDates.csv", "w"))          # csv writer object for listDates.csv file
 
     for key, val in timesCalled.items():
         saveCalls.writerow([key, val])
