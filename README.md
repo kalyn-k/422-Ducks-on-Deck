@@ -6,7 +6,7 @@ Description:
 This cold-calling system is intended to be used by a class instructor to easily call on students while giving a lecture. The instructor will be able to interact with a window at the top of their screen, and has the option to start the program. Upon the start, 4 random student names will appear in this window. The instructor will be able to use the arrow keys to move between students, remove a student once they have been called on, and flag student’s who they may want to reach out to. The keyboard input will save data which can be viewed later which keeps track of how many times a student was called upon and any notes on the student’s answer. 
 
 Authors: 
-Ellie Kobak, Kayln Koyanagi, Liza Richards, Kelly Schombert
+Ellie Kobak, Kalyn Koyanagi, Liza Richards, Kelly Schombert
 
 Date created:
 	1/14/2022
