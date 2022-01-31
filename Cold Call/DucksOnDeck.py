@@ -1,12 +1,12 @@
 """
 Name: DucksOnDeck.py
-Purpose: Control the software user interface
+Purpose: To create and control the software user interface.
 
 Creation Date: Jan. 20, 2022
 Last Updated: Jan. 30, 2022
 
 Authors: Kalyn Koyanagi (kek), Liza Richards (ljr)
-TODO add purpose and function of file
+
 Modifications:
 Created file                        kek     1/20/22
 Added keystrokes                    kek     1/21/22
