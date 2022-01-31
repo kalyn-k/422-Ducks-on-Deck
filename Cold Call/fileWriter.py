@@ -37,6 +37,10 @@ def makeDailyLog():
     """
     Creates daily log file and writes heading to file.
     Called by updateLogs() if the daily log file hasn't been created yet.
+    Inputs: None
+    Returns: None
+    Called by:
+        updateLogs()
     """
     dLog = open(dailylog, "w")  # daily log file object
     dLog.write("Daily log for cold-call-assist program\n")
@@ -48,10 +52,15 @@ def updateLogs(flag: bool, name: str, email: str):
     Updates daily log txt file by appending line with relevant student data passed to function.
     Called by buildQueue.py when a keystroke is pressed and a name is removed/flagged.
 
+    Inputs:
     :bool flag: False if student was not flagged, True if student was flagged
     :str name: name of student cold called
     :str email: email address of student cold called
+    
+    Returns: 
+    None
     """
+    # verifies path is valid to make log
     if (os.path.exists(dailylog)) == False:
         makeDailyLog()
 
@@ -66,11 +75,15 @@ def updateLogs(flag: bool, name: str, email: str):
 
 def exportSumPerf(roster: list):
     """
-    Reads current csv file data to corresponding dictionary, asks user for summary performance file name, writes heading and student data to summary performance file.
-    Called by DucksOnDeck.py when user chooses to export summary performance data
+    Reads current csv file data to corresponding dictionary, asks user for summary performance file name, 
+    writes heading and student data to summary performance file.
+    Called by:
+        DucksOnDeck.py when user chooses to export summary performance data
 
-    :list roster: list of student data: first name, last name, ID number, email address
+    Inputs:list roster: list of student data: first name, last name, ID number, email address
+    Returns: None, but creates the files containing logging information
     """
+    # creates files for log info
     with open('../timesCalled.csv', mode='r') as inp:
         reader = csv.reader(inp)                                    # csv reader object for timesCalled.csv file
         timesCalled = {rows[0]:int(rows[1]) for rows in reader}
@@ -84,6 +97,8 @@ def exportSumPerf(roster: list):
     sumPerfname = ""                                                # summary performance file name; initialized to be empty 
     message = "Please type in the name you would prefer for the summary performance log\nThe file name will be formatted as [chosen_name].txt\nTo exit program, press 'Ctrl + c'\n"    # instructions to user for entering summary performance file name
     print(message)
+    
+    # Gets file name from user input 
     for line in sys.stdin:
         print(f"\nFile name entered: {line.rstrip()}")
         print("Press 'ctr + d' to submit file")
@@ -94,6 +109,7 @@ def exportSumPerf(roster: list):
     sumPerf.write("Total times called\t" + "Number of flags\t" + "First Name\t" + "Last Name\t" + "UO ID\t" + "Email Address\t" + "Phonetic Spelling\t" + "List of Dates\t\n");
     sumPerf.write("\n")
     
+    # Formats output
     for student in roster:
         name = student[0] + " " + student[1]                        # full student name; adds first and last name together
         name = name.strip()
@@ -111,8 +127,10 @@ def initSumPerf(roster: list):
     Initialized summary performance dictionaries and corresponding csv files.
     Called by fileReader.py with the import of a new roster of students.
 
-    :list roster: list of student data: first name, last name, ID number, email address
+    Input:list roster: list of student data: first name, last name, ID number, email address
+    Return: None 
     """
+    # creates file for daily performance and formats
     for student in roster:
         name = student[0] + " " + student[1]                    # full student name; adds first and last name together
         name = name.strip()
@@ -121,10 +139,12 @@ def initSumPerf(roster: list):
         numFlags[name] = 0                                      # numFlags dict value intialized to 0
         listDates[name] = ""                                    # listDates dict value initialized to empty string
     
+    # Saves updated files
     saveCalls = csv.writer(open("../timesCalled.csv", "w"))        # csv writer object for timesCalled.csv file
     saveFlags = csv.writer(open("../numFlags.csv", "w"))           # csv writer object for numFlags.csv file
     saveDates = csv.writer(open("../listDates.csv", "w"))          # csv writer object for listDates.csv file
 
+    # formatting output 
     for key, val in timesCalled.items():
         saveCalls.writerow([key, val])
     for key, val in numFlags.items():
@@ -137,9 +157,12 @@ def updateSumPerf(flag: bool, name: str):
     Reads current csv file data to corresponding dictionary, updates student data in dictionary, writes new data to csv files.
     Called by DucksOnDeck.py anytime that a keystroke is pressed and a student is cold called.
 
-    :bool flag: False if student was not flagged, True if student was flagged
-    :str name: name of student cold called
+    Inputs
+        :bool flag: False if student was not flagged, True if student was flagged
+        :str name: name of student cold called
+    Returns: None
     """
+    # Opens the logging files
     with open('../timesCalled.csv', mode='r') as inp:
         reader = csv.reader(inp)                                # csv reader object for timesCalled.csv file
         timesCalled = {rows[0]:int(rows[1]) for rows in reader}
@@ -150,6 +173,7 @@ def updateSumPerf(flag: bool, name: str):
         reader = csv.reader(inp)                                # csv reader object for listDates.csv file
         listDates = {rows[0]:rows[1] for rows in reader}
 
+    # Checks if name is flaged
     if flag:
         numFlags[name] += 1
     timesCalled[name] += 1
@@ -159,6 +183,7 @@ def updateSumPerf(flag: bool, name: str):
     saveFlags = csv.writer(open("../numFlags.csv", "w"))           # csv writer object for numFlags.csv file
     saveDates = csv.writer(open("../listDates.csv", "w"))          # csv writer object for listDates.csv file
 
+    # for formatting output/print statement
     for key, val in timesCalled.items():
         saveCalls.writerow([key, val])
     for key, val in numFlags.items():
