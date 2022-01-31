@@ -32,13 +32,13 @@ def getFileName():
     '''
     fname = ""  # initialized string for file name input
     # message to user with instructions on what to input and interact with the system
-    welcome_message = "Please type in the file name of a csv or text file that \ncontains your class roster in a tab deliminated format.\nThis is an infinite loop until a valid file is entered.\nTo exit program press 'ctl + c\n"
+    welcome_message = "Please type in the file name of a csv or text file that \ncontains your class roster in a tab deliminated format.\nThis is an infinite loop until a valid file is entered.\nTo exit program press 'Ctrl + c'\n"
     print(welcome_message) # displays message to uder/standard output
     
     # interprets standard input
     for line in sys.stdin:
         print(f"File entered: {line.rstrip()}") # displays to user the file they entered, useful for ensuring correct file input
-        print("Press 'ctr + d' to submit file") # how to exit standard input
+        print("Press 'Ctrl + d' to submit file") # how to exit standard input
         fname = line.rstrip() # strips input of white space and new line characters
 
     return fname # returns file name
