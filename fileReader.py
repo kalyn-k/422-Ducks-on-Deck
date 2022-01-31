@@ -62,16 +62,16 @@ def filereader():
 
     print(f"the file inputted was {fname}") # allows use to know what file they entered
 
-    with open(fname, 'r') as roster: # below parses the file
+    with open(fname, 'r') as roster:             # below parses the file
 
-        file_data = roster.read().split("\n") # splits each line into a list
+        file_data = roster.read().split("\n")    # splits each line into a list
 
-        for i in range(len(file_data)): # divides the list of each student into usable form
-            data = file_data[i].split("\t") # splits into the name, ID number, and email
+        for i in range(len(file_data)):          # divides the list of each student into usable form
+            data = file_data[i].split("\t")      # splits into the name, ID number, and email
             if i != 0:
                 roster_list.append(data)
 
-            fileWriter.initSumPerf(roster_list) # initializes summary performance document in alphabetic order
+            fileWriter.initSumPerf(roster_list)  # initializes summary performance document in alphabetic order
 
     return roster_list # returns list of lists
 

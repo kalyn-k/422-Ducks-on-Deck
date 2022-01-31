@@ -206,22 +206,22 @@ class GraphicalUserInterface:
         # set the first student's position on the deck
         self.student_1 = Label(deck, textvariable=self.first)
         self.student_1.pack(padx=12, pady=6, side=LEFT)
-        self.student_1.configure(width=15, height=2, wraplength=100, relief='flat', bg='white', fg="black",
+        self.student_1.configure(width=15, height=3, wraplength=100, relief='flat', bg='white', fg="black",
                                  font=("TkDefaultFont", 15))
         # set the second student's position on the deck
         self.student_2 = Label(deck, textvariable=self.second)
         self.student_2.pack(padx=12, pady=6, side=LEFT)
-        self.student_2.configure(width=15, height=2, wraplength=100, relief='flat', bg='black', fg="white",
+        self.student_2.configure(width=15, height=3, wraplength=100, relief='flat', bg='black', fg="white",
                                  font=("TkDefaultFont", 15))
         # set the third student's position on the deck
         self.student_3 = Label(deck, textvariable=self.third)
         self.student_3.pack(padx=12, pady=6, side=LEFT)
-        self.student_3.configure(width=15, height=2, wraplength=100, relief='flat', bg='black', fg="white",
+        self.student_3.configure(width=15, height=3, wraplength=100, relief='flat', bg='black', fg="white",
                                  font=("TkDefaultFont", 15))
         # set the fourth student's position on the deck
         self.student_4 = Label(deck, textvariable=self.fourth)
         self.student_4.pack(padx=12, pady=6, side=LEFT)
-        self.student_4.configure(width=15, height=2, wraplength=100, relief='flat', bg='black', fg="white",
+        self.student_4.configure(width=15, height=3, wraplength=100, relief='flat', bg='black', fg="white",
                                  font=("TkDefaultFont", 15))
 
         # monitor which keystrokes that are initiated by the user, and all their respective methods
