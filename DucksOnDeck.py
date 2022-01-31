@@ -18,9 +18,9 @@ Finished final modifications        kek     1/29/22
 """
 
 # Import Statements
-from tkinter import *                            # used to create all user interface aspects
-from buildQueue import *                         # used to build/update a queue using student data
-from fileWriter import *                         # used to write to files with session data
+from tkinter import *     # used to create all user interface aspects
+from buildQueue import *  # used to build/update a queue using student data
+from fileWriter import *  # used to write to files with session data
 
 
 class GraphicalUserInterface:
@@ -57,7 +57,7 @@ class GraphicalUserInterface:
         self.first = None                        # name of student in the first slot on the "deck"
         self.second = None                       # name of student in the second slot on the "deck"
         self.third = None                        # name of student in the third slot on the "deck"
-        self.fourth = None                        # name of student in the fourth slot on the "deck"
+        self.fourth = None                       # name of student in the fourth slot on the "deck"
 
         self.highlight_ind = 0                   # Index to keep track of where the highlight currently is
 
@@ -78,14 +78,14 @@ class GraphicalUserInterface:
         """
         # check if the student currently highlighted is at the end of the deck
         if self.highlight_ind == 3:
-            old_pos = self.highlight_ind         # index of the previously highlighted student
-            self.highlight_ind = 0               # new updated highlight index
+            old_pos = self.highlight_ind    # index of the previously highlighted student
+            self.highlight_ind = 0          # new updated highlight index
             # update the deck to represent which student needs to be highlighted
             self.toggleHighlight(self.highlight_ind, old_pos)
         else:
             # student is not at the end of the deck
-            old_pos = self.highlight_ind         # index of the previously highlighted student
-            self.highlight_ind += 1              # new updated highlight index
+            old_pos = self.highlight_ind    # index of the previously highlighted student
+            self.highlight_ind += 1         # new updated highlight index
             # update the deck to represent which student needs to be highlighted
             self.toggleHighlight(self.highlight_ind, old_pos)
 
@@ -103,13 +103,13 @@ class GraphicalUserInterface:
         """
         # check if the student currently highlighted is at the beginning of the deck
         if self.highlight_ind == 0:
-            old_pos = 0                          # index of the previously highlighted student
-            self.highlight_ind = 3               # new updated highlight index
+            old_pos = 0                     # index of the previously highlighted student
+            self.highlight_ind = 3          # new updated highlight index
             # update the deck to represent which student needs to be highlighted
             self.toggleHighlight(self.highlight_ind, old_pos)
         else:
-            old_pos = self.highlight_ind         # index of the previously highlighted student
-            self.highlight_ind -= 1              # new updated highlight index
+            old_pos = self.highlight_ind    # index of the previously highlighted student
+            self.highlight_ind -= 1         # new updated highlight index
             # update the deck to represent which student needs to be highlighted
             self.toggleHighlight(self.highlight_ind, old_pos)
 
@@ -141,7 +141,7 @@ class GraphicalUserInterface:
         Returns:
             None
         """
-        remove_ind = self.highlight_ind          # index of student who is going to be removed from the queue
+        remove_ind = self.highlight_ind  # index of student who is going to be removed from the queue
         # remove the student from the queue and then update the deck
         self.currentQueue.remove(remove_ind, False)
         self.UpdateDeck(self.ondeck())
@@ -162,7 +162,7 @@ class GraphicalUserInterface:
         old = current_positions.get(old_pos)     # the label of the student that was previously highlighted
         old.configure(bg='black', fg="white")    # removes the highlight of the old label
         self.highlight_ind = highlight_index     # update which index is currently highlighted
-        new = current_positions.get(self.highlight_ind)     # the label of the student that is currently highlighted
+        new = current_positions.get(self.highlight_ind)  # the label of the student that is currently highlighted
         new.configure(bg='white', fg='black')    # change the highlight color for the new name that is highlighted
         self.on_deck.update()                    # update the deck to reflect new deck
 
@@ -194,14 +194,14 @@ class GraphicalUserInterface:
         self.third = StringVar()
         self.fourth = StringVar()
 
-        names = self.ondeck()                    # Get the names of the students
+        names = self.ondeck()  # Get the names of the students
         # assign the names of the students to their respective spots on the deck
         self.first.set(names[0][0].split()[0] + " " + names[0][1].split()[0].replace(',', ''))
         self.second.set(names[1][0].split()[0] + " " + names[1][1].split()[0].replace(',', ''))
         self.third.set(names[2][0].split()[0] + " " + names[2][1].split()[0].replace(',', ''))
         self.fourth.set(names[3][0].split()[0] + " " + names[3][1].split()[0].replace(',', ''))
 
-        self.highlight_ind = 0                   # index of the first name that is highlighted on the deck
+        self.highlight_ind = 0  # index of the first name that is highlighted on the deck
 
         # set the first student's position on the deck
         self.student_1 = Label(deck, textvariable=self.first)
@@ -243,7 +243,7 @@ class GraphicalUserInterface:
         Returns:
             names: list of names of the students on the deck
         """
-        names = []                               # list that will be used to store the names of the students on the deck
+        names = []  # list that will be used to store the names of the students on the deck
         # iterate through the queue and add each name to the list
         for stu in self.currentQueue:
             names.append(stu)
@@ -266,12 +266,16 @@ class GraphicalUserInterface:
 
     def MenuDisplay(self):
         """
-        Method to
+        Purpose of this method is to create the user menu window,
+        and it's corresponding buttons.
 
+        Parameter:
+            None
         Returns:
-        :None:
+            None
         """
-        self.menu = Tk()  # Toplevel()  # " Ducks on Deck: Menu ")
+        # initiate the menu window, and set it's title
+        self.menu = Tk()
         menu = self.menu
         menu.title(" Ducks on Deck: Menu ")
         # Sets window size
@@ -283,19 +287,21 @@ class GraphicalUserInterface:
 
         # Create a Header for the menu
         header = Label(menu, width=50, text="DUCKS ON DECK", bg="black", fg="yellow",
-                       font=("TkDefaultFont", 18))  # Iniate
+                       font=("TkDefaultFont", 18))
         header.pack(side=TOP, padx=10, pady=15)
-        # Create menu buttons here
+
+        # Create menu buttons
+        # export performance summary button
         export_total_button = Button(menu, text="Export Performance\n Summary", font=("TkDefaultFont", 20),
-                                     command=self.UserExportTerm, bg="white", width=15)
+                                     command=self.UserExportTerm, bg="white", width=15)  # initiate the button
         export_total_button.pack(padx=10, pady=10)
         # Button to create a new session
         session_button = Button(menu, text="    New Session   ", font=("TkDefaultFont", 20), command=self.presView,
-                                bg="white", width=15)
+                                bg="white", width=15)  # initiate the button
         session_button.pack(padx=10, pady=10)
         # Button to exit session
         exit_button = Button(menu, text="            Exit           ", font=("TkDefaultFont", 20), command=self.exit_,
-                             bg="white", width=15)
+                             bg="white", width=15)  # initiate the button
         exit_button.pack(padx=10, pady=10)
         menu.mainloop()
 
@@ -305,27 +311,36 @@ class GraphicalUserInterface:
         when user clicks corresponding exit
         button on the menu window.
 
+        Parameter:
+            None
         Returns:
-        :None:
+            None
         """
-        sys.exit()
+        sys.exit()  # use the exit method from the sys module
 
     def UpdateDeck(self, current_ducks):
         """
-        Purpose of this method
+        Purpose of this method to update the student names on the deck.
+        Is called upon when students are removed, highlighted, or
+        when the deck is initially created.
 
+        Parameter:
+            None
         Returns:
-        :None:
+            None
         """
+        # update and set all the current student names on the deck
         self.first.set(current_ducks[0][0].split()[0] + " " + current_ducks[0][1])
         self.second.set(current_ducks[1][0].split()[0] + " " + current_ducks[1][1])
         self.third.set(current_ducks[2][0].split()[0] + " " + current_ducks[2][1])
         self.fourth.set(current_ducks[3][0].split()[0] + " " + current_ducks[3][1])
+        # initiate the update
         self.on_deck.update()
 
         return
 
 
+# program driver
 if __name__ == "__main__":
     screen = GraphicalUserInterface()
     screen.MenuDisplay()
