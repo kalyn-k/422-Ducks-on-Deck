@@ -35,7 +35,7 @@ Software Dependencies:
 Directory Structure:
   1. “Cold Call” contains the four working system components in the form of python files which are DucksOnDeck.py,
   buildQueue.py, fileReader.py, fileWriter.py.
-  2. “Documentation” includes all of the required documentation including the updated SRS, updated SDS, updated Project Plan, User Documentation, and Programmer  Documentation in pdf format. 
+  2. “Documentation” includes all of the required documentation including the updated SRS, updated SDS, updated Project Plan, Installation Instructions, User Documentation, and Programmer  Documentation in pdf format. 
   3. "Initial Documentation" includes the first versions of the SRS, SDS, and Project Plan that were submitted in the in Initial Project Plan. 
   4. "test_data" is a folder that contains all of the testing data to be used when running the system. Note that the only file that properly works with the system    is the .txt file. 
 	
